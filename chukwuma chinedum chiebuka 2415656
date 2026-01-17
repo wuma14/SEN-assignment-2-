@@ -1,0 +1,62 @@
+# Student Result Management System
+
+students = {}
+
+def add_student():
+    matric = input("Enter matric number: ")
+    name = input("Enter student name: ")
+    students[matric] = {"name": name, "score": None, "grade": None}
+    print("Student added successfully.\n")
+
+def add_score():
+    matric = input("Enter matric number: ")
+    if matric in students:
+        score = int(input("Enter score (0-100): "))
+        students[matric]["score"] = score
+        students[matric]["grade"] = calculate_grade(score)
+        print("Score added successfully.\n")
+    else:
+        print("Student not found.\n")
+
+def calculate_grade(score):
+    if score >= 70:
+        return "A"
+    elif score >= 60:
+        return "B"
+    elif score >= 50:
+        return "C"
+    elif score >= 45:
+        return "D"
+    else:
+        return "F"
+
+def view_results():
+    for matric, data in students.items():
+        print(f"Matric: {matric}")
+        print(f"Name: {data['name']}")
+        print(f"Score: {data['score']}")
+        print(f"Grade: {data['grade']}")
+        print("-------------------")
+
+def menu():
+    while True:
+        print("1. Add Student")
+        print("2. Add Score")
+        print("3. View Results")
+        print("4. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_student()
+        elif choice == "2":
+            add_score()
+        elif choice == "3":
+            view_results()
+        elif choice == "4":
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice.\n")
+
+menu()
